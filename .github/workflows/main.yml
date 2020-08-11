@@ -1,0 +1,25 @@
+name: Test, build, push and deploy
+
+on: [push]
+
+env:
+  IMAGE: docker.pkg.github.com/${{ github.repository }}/shiny-octo-spork:${{ github.sha }}
+  TZ: Europe/Amsterdam
+
+jobs:
+  build:
+    name: CI/CD pipeline
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Build docker image
+        run: |
+          docker build --tag ${IMAGE} .
+
+      - name: Push docker image
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
+          docker push ${IMAGE}
