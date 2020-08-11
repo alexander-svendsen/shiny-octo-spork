@@ -7,13 +7,14 @@ const kafka = require('kafka-node');
 const PORT = 8080;
 const HOST = '0.0.0.0';
 
-const client = new kafka.KafkaClient({kafkaHost: '10.166.0.5:9092', fromOffset: 'earliest'});
+const client = new kafka.KafkaClient({kafkaHost: '10.166.0.5:9092'});
 const consumer = new kafka.Consumer(
 client,
 [
     { topic: 'test', partition: 0 }
 ],
 {
+    fromOffset: 'earliest',
     autoCommit: false
 }
 );
