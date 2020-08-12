@@ -2,6 +2,18 @@
 
 const express = require('express');
 const kafka = require('kafka-node');
+var pgp = require('pg-promise');
+var db = pgp(`postgres://admin:${process.env.postgresql-1-secret}@10.125.7.71:5432/database`)
+
+
+db.one('SELECT $1 AS value', 123)
+    .then(function (data) {x
+        console.log('DATA:', data.value)
+    })
+    .catch(function (error) {
+        console.log('ERROR:', error)
+    })
+
 
 // Constants
 const PORT = 8080;
