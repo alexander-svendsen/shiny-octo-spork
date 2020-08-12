@@ -2,14 +2,10 @@
 
 const express = require('express');
 const kafka = require('kafka-node');
+const postgress = require('pg-promise');
 
-
-var pgp = require('pg-promise');
-
-var db = pgp({
-    connectionString: `postgres://postgres:${process.env.password}@10.125.7.71:5432/`,
-    max: 30
-});
+const pgp = postgress({});
+const db = pgp(`postgres://postgres:${process.env.password}@10.125.7.71:5432/`);
 
 db.one('SELECT $1 AS value', 123)
     .then(function (data) {
