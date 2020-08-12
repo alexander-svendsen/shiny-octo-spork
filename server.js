@@ -40,9 +40,16 @@ consumer.on('error', function(err) {
 // App
 const app = express();
 app.get('/', (req, res) => {
-    db.any('SELECT MESSAGE FROM EVENT ORDER BY ID DESC LIMIT 1')
-        .then(msg => res.send('Hello ' + msg))
-        .catch(res.send("FAAAAAAAILED!!!!"))
+    try {
+        db.any('SELECT MESSAGE FROM EVENT ORDER BY ID DESC LIMIT 1')
+            .then(msg => res.send('Hello ' + msg))
+            .catch(e => {
+                console.log("ERROR", e);
+                res.send("FAAAAAAAILED!!!!");
+            })
+    } catch (e) {
+        // ignore
+    }
 });
 
 app.listen(PORT, HOST);
