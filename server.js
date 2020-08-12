@@ -46,7 +46,7 @@ app.get('/', (req, res) => {
         db.one('SELECT MESSAGE FROM EVENT ORDER BY ID DESC LIMIT 1')
             .then(msg => {
                 console.log("Keys " + Object.keys(msg))
-                return res.send('Hello ' + msg.value)
+                return res.send('Hello ' + msg.message)
             })
             .catch(e => {
                 console.log("ERROR", e);
