@@ -41,6 +41,9 @@ jobs:
           project_id: ${{ secrets.GKE_PROJECT }}
 
       - run: |-
+          gcloud --quiet auth configure-docker
+
+      - run: |-
           gcloud container clusters get-credentials ${{ env.GKE_CLUSTER }} --zone ${{ env.GKE_ZONE }}
 
       - name: Set up Kustomize
