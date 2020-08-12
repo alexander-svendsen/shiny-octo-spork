@@ -10,7 +10,7 @@ var db = pgp(`postgres://admin:${process.env.POSTGRESQL_PASSWORD}@10.125.7.71:54
 
 
 db.one('SELECT $1 AS value', 123)
-    .then(function (data) {x
+    .then(function (data) {
         console.log('DATA:', data.value)
     })
     .catch(function (error) {
