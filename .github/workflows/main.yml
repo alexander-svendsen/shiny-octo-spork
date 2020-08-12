@@ -53,7 +53,7 @@ jobs:
 
       - name: Deploy to GKE
         run: |-
-          ./kustomize edit set image $IMAGE:${{ GITHUB.SHA }}
+          ./kustomize edit set image ${{ env.IMAGE }}:${{ GITHUB.SHA }}
           ./kustomize build . | kubectl apply -f -
-          kubectl rollout status deployment/$DEPLOYMENT_NAME
+          kubectl rollout status deployment/${{ env.DEPLOYMENT_NAME }}
           kubectl get services -o wide
