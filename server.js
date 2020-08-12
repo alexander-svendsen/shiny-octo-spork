@@ -2,6 +2,7 @@
 
 const express = require('express');
 const kafka = require('kafka-node');
+/*
 var pgp = require('pg-promise');
 
 const cn = {
@@ -26,6 +27,8 @@ db.one('SELECT $1 AS value', 123)
 
 
 // Constants
+
+ */
 const PORT = 8080;
 const HOST = '0.0.0.0';
 
