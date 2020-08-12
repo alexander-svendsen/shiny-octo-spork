@@ -33,17 +33,15 @@ jobs:
           tags: ${{ GITHUB.SHA }}, latest
           tag_with_ref: true
 
-      - name: Setup GKE deployment
+      - name: Setup Google cloud CLI
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
           version: '290.0.1'
           service_account_key: ${{ secrets.GKE_SA_KEY }}
           project_id: ${{ secrets.GKE_PROJECT }}
 
-      - run: |-
-          gcloud --quiet auth configure-docker
-
-      - run: |-
+      - name: Setup kubernetes credentials
+        run: |-
           gcloud container clusters get-credentials ${{ env.GKE_CLUSTER }} --zone ${{ env.GKE_ZONE }}
 
       - name: Set up Kustomize
@@ -51,7 +49,7 @@ jobs:
           curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
           chmod u+x ./kustomize
 
-      - name: Deploy to GKE
+      - name: Deploy to Google Cloud
         run: |-
           ./kustomize edit set image IMAGE:TAG=${{ env.IMAGE }}:${{ GITHUB.SHA }}
           ./kustomize build . | kubectl apply -f -
