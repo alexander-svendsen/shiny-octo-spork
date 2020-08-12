@@ -41,7 +41,7 @@ jobs:
           project_id: ${{ secrets.GKE_PROJECT }}
 
       - run: |-
-        gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
+          gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
 
       - name: Set up Kustomize
         run: |-
