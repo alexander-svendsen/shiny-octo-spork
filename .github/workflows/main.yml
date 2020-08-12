@@ -10,8 +10,8 @@ env:
   GKE_CLUSTER: prod
   GKE_ZONE: europe-north1-a
   DEPLOYMENT_NAME: gke-test
-  IMAGE: thealexander/shiny-octo-spork
   TZ: Europe/Amsterdam
+  IMAGE: thealexander/shiny-octo-spork
 
 jobs:
   build:
