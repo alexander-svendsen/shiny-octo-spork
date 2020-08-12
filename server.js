@@ -30,7 +30,8 @@ const consumer = new kafka.Consumer(client,[{topic: 'test', partition: 0 }],
 
 
 consumer.on('message', function (message) {
-    db.any(`INSERT INTO EVENT(MESSAGE) VALUES(${message})`)
+    console.log("Kafka message:", message)
+    db.none(`INSERT INTO EVENT(MESSAGE) VALUES(${message})`)
 });
 
 consumer.on('error', function(err) {
@@ -40,6 +41,7 @@ consumer.on('error', function(err) {
 // App
 const app = express();
 app.get('/', (req, res) => {
+    console.log("Request recived")
     try {
         db.any('SELECT MESSAGE FROM EVENT ORDER BY ID DESC LIMIT 1')
             .then(msg => res.send('Hello ' + msg))
