@@ -43,8 +43,8 @@ const app = express();
 app.get('/', (req, res) => {
     console.log("Request recived")
     try {
-        db.any('SELECT MESSAGE FROM EVENT ORDER BY ID DESC LIMIT 1')
-            .then(msg => res.send('Hello ' + msg))
+        db.one('SELECT MESSAGE FROM EVENT ORDER BY ID DESC LIMIT 1')
+            .then(msg => res.send('Hello ' + msg.value))
             .catch(e => {
                 console.log("ERROR", e);
                 res.send("FAAAAAAAILED!!!!");
