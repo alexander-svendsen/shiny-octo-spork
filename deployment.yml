@@ -16,6 +16,9 @@ spec:
     spec:
       containers:
         - name: gke-test
+          envFrom:
+            - secretRef:
+                name: postgresql-1-secret
           image: IMAGE:TAG
           ports:
             - containerPort: 8080
