@@ -3,22 +3,13 @@
 const express = require('express');
 const kafka = require('kafka-node');
 
-console.log("env keys", Object.keys(procces.env))
 
-/*
 var pgp = require('pg-promise');
 
-const cn = {
-    host: '10.125.7.71',
-    port: 5432,
-    user: 'postgres',
-    password: `${process.env.password}`,
-    max: 30 // use up to 30 connections
-};
-
-
-var db = pgp(cn)
-
+var db = pgp({
+    connectionString: `postgres://postgres:${process.env.password}@10.125.7.71:5432/`,
+    max: 30
+});
 
 db.one('SELECT $1 AS value', 123)
     .then(function (data) {
@@ -28,10 +19,6 @@ db.one('SELECT $1 AS value', 123)
         console.log('ERROR:', error)
     })
 
-
-// Constants
-
- */
 const PORT = 8080;
 const HOST = '0.0.0.0';
 
