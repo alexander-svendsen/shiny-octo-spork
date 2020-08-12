@@ -7,14 +7,6 @@ const postgress = require('pg-promise');
 const pgp = postgress({});
 const db = pgp(`postgres://postgres:${process.env.password}@10.125.2.69:5432/`);
 
-db.one('SELECT $1 AS value', 123)
-    .then(function (data) {
-        console.log('DATA:', data.value)
-    })
-    .catch(function (error) {
-        console.log('ERROR:', error)
-    })
-
 const PORT = 8080;
 const HOST = '0.0.0.0';
 
@@ -30,7 +22,6 @@ const consumer = new kafka.Consumer(client,[{topic: 'test', partition: 0 }],
 
 
 consumer.on('message', function (message) {
-    console.log("Kafka message:", message.value)
     db.none(`INSERT INTO EVENT(MESSAGE) VALUES('${message.value}')`)
 });
 
@@ -41,11 +32,9 @@ consumer.on('error', function(err) {
 // App
 const app = express();
 app.get('/', (req, res) => {
-    console.log("Request recived")
     try {
         db.one('SELECT MESSAGE FROM EVENT ORDER BY ID DESC LIMIT 1')
             .then(msg => {
-                console.log("Keys " + Object.keys(msg))
                 return res.send('Hello ' + msg.message)
             })
             .catch(e => {
