@@ -22,7 +22,7 @@ jobs:
 
       - name: Build docker image
         run: |
-          docker build .
+          docker build --tag ${IMAGE} .
 
       - name: Push to Docker Hub
         uses: docker/build-push-action@v1
