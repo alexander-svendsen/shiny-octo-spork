@@ -6,7 +6,7 @@ var pgp = require('pg-promise');
 
 console.log("process.env " + Object.keys(process.env));
 
-var db = pgp(`postgres://admin:${process.env.postgresql-1-secret}@10.125.7.71:5432/database`)
+var db = pgp(`postgres://admin:${process.env.POSTGRESQL_PASSWORD}@10.125.7.71:5432/database`)
 
 
 db.one('SELECT $1 AS value', 123)
