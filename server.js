@@ -2,6 +2,9 @@
 
 const express = require('express');
 const kafka = require('kafka-node');
+
+console.log("env keys", Object.keys(procces.env))
+
 /*
 var pgp = require('pg-promise');
 
