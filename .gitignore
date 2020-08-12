@@ -4,3 +4,4 @@ target
 *.log
 *.gz
 ignore
+node_modules
