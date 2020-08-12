@@ -5,7 +5,7 @@ const kafka = require('kafka-node');
 const postgress = require('pg-promise');
 
 const pgp = postgress({});
-const db = pgp(`postgres://postgres:${process.env.password}@10.125.7.71:5432/`);
+const db = pgp(`postgres://postgres:${process.env.password}@10.125.2.69:5432/`);
 
 db.one('SELECT $1 AS value', 123)
     .then(function (data) {
