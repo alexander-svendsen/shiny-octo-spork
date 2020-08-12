@@ -4,9 +4,16 @@ const express = require('express');
 const kafka = require('kafka-node');
 var pgp = require('pg-promise');
 
-console.log("process.env " + Object.keys(process.env));
+const cn = {
+    host: '10.125.7.71',
+    port: 5432,
+    user: 'postgres',
+    password: `${process.env.password}`,
+    max: 30 // use up to 30 connections
+};
 
-var db = pgp(`postgres://admin:${process.env.password}@10.125.7.71:5432/database`)
+
+var db = pgp(cn)
 
 
 db.one('SELECT $1 AS value', 123)
