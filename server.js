@@ -30,8 +30,8 @@ const consumer = new kafka.Consumer(client,[{topic: 'test', partition: 0 }],
 
 
 consumer.on('message', function (message) {
-    console.log("Kafka message:", message)
-    db.none(`INSERT INTO EVENT(MESSAGE) VALUES(${message})`)
+    console.log("Kafka message:", message.value)
+    db.none(`INSERT INTO EVENT(MESSAGE) VALUES(${message.value})`)
 });
 
 consumer.on('error', function(err) {
