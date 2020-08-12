@@ -3,6 +3,9 @@
 const express = require('express');
 const kafka = require('kafka-node');
 var pgp = require('pg-promise');
+
+console.log("process.env " + process.env);
+
 var db = pgp(`postgres://admin:${process.env.postgresql-1-secret}@10.125.7.71:5432/database`)
 
 
