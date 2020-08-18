@@ -10,7 +10,7 @@ const db = pgp(`postgres://postgres:${process.env.password}@10.125.2.69:5432/`);
 const PORT = 8080;
 const HOST = '0.0.0.0';
 
-const client = new kafka.KafkaClient({kafkaHost: '10.166.0.5:9092'});
+const client = new kafka.KafkaClient({kafkaHost: 'kafka-0.kafka-hs.default.svc.cluster.local:9093,kafka-1.kafka-hs.default.svc.cluster.local:9093,kafka-2.kafka-hs.default.svc.cluster.local:9093'});
 const consumer = new kafka.Consumer(client,[{topic: 'test', partition: 0 }],
     {
         autoCommit: true,
